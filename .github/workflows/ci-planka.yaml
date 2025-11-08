@@ -1,0 +1,78 @@
+name: CI - Run API tests
+
+#Define eventos que activan el workflow 
+on:
+  #Habilita la ejecucion manual del workflow desde el boton "Run Workflow" en GitHub Actions
+  workflow_dispatch:
+    inputs:
+       mark: #permite que ejecutes el workflow manualmente , ingreses un valor por ejemplo un tipo dde mark
+        description:'  Seleccionar la marca para ejecutar por tipo de prueba'
+        required: true
+        default:'smoke'
+        type:choice
+        options:
+        - card
+        - list
+        - board
+        - project_management
+        - smoke
+        - functional_positive
+        - functional_negative
+        - regression
+        - performance
+        - e2e
+        - schema_validation
+        - payload_validation
+        - headers_validation
+        - equivalence_partition 
+
+jobs:
+  pruebas: 
+    name: Ejecutar tipos de casos de prueba en la rama personal daniela
+    runs-on: ubuntu-latest
+
+    steps:
+       # paso 1 :  Descargar Codigo de la rama personal daniela
+      - name: Descarga codigo de la rama daniela
+        uses: actions/checkout@v4
+        with:
+          ref: daniela
+
+      # paso 2 : Configurar Python
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+ 
+      # paso 3 : Instalar Dependencias
+      - name: Instalar Dependencias
+        run: | 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # paso 4 : Generar token unico
+      - name: Generar token unico
+        run: |
+           python utils/auth_token.py
+
+      # paso 5: Ejecutar pruebas con las marca seleccionada y generar reporte Allure
+      - name: Ejecutar pruebas con Pytest y crear reporte Allure 
+        run: |
+          echo "Ejecutando pruebas con la marca seleccionada: ${{ inputs.mark }}..."
+          pytest -m "${{ inputs.mark }}" --alluredir=allure-results
+      
+      - name: Instalar Allure CLI
+        uses: simple-elf/allure-commandline-action@v2.0
+        with:
+          allure-version: 2.27.0
+
+      - name: Generar reporte Allure HTML
+        run: |
+           allure generate allure-results -o allure-report --clean
+
+      - name: Subir reporte Allure
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ inputs.mark }}
+          path: allure-report
+  

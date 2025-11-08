@@ -1,7 +1,5 @@
 
-import json
 import pytest
-from config import BASE_URI
 from src.resources.payloads.card_payloads import PAYLOAD_CREATE_CARD
 from src.routes.endpoint import EndpointPlanka
 from src.routes.request import PlankaRequests
@@ -15,9 +13,9 @@ logger = get_logger("card_fixture")
 def post_card(get_token):
     url = EndpointPlanka.BASE_CARDS.value
     TOKEN_PLANKA = get_token
-    payload = json.dumps(PAYLOAD_CREATE_CARD)
+    payload = PAYLOAD_CREATE_CARD
     headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
-    response = PlankaRequests.post(url, headers=headers, data=payload)
+    response = PlankaRequests.post(url, headers, payload)
     data = response.json()
     card_id = data["item"]["id"]
     yield card_id

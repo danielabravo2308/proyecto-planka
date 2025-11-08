@@ -1,7 +1,5 @@
 
-import json
 import pytest
-from config import BASE_URI
 from src.routes.endpoint import EndpointPlanka
 from src.assertions.status_code_assertion import AssertionStatusCode
 from src.routes.request import PlankaRequests
@@ -15,9 +13,9 @@ logger = get_logger("board_fixture")
 def post_test_board(get_token):
     url = EndpointPlanka.BASE_BOARDS.value
     TOKEN_PLANKA = get_token
-    payload = json.dumps(PAYLOAD_BOARD_CREATE)
+    payload = PAYLOAD_BOARD_CREATE
     headers = {'Authorization': f'Bearer {TOKEN_PLANKA}',}
-    response = PlankaRequests.post(url, headers=headers, data=payload)
+    response = PlankaRequests.post(url,headers,payload)
     data = response.json()
     board_id = data["item"]["id"]
     yield board_id
@@ -35,9 +33,7 @@ def setup_add_board(get_token):
         board_id = board.get("item", {}).get("id")
         try:
               delete_url = f"{EndpointPlanka.BASE_BOARD_MAJOR.value}/{board_id}"
-              headers = {
-                    'Authorization': f'Bearer {get_token}'
-                } 
+              headers = {'Authorization': f'Bearer {get_token}'} 
               delete_response = PlankaRequests.delete(delete_url,headers=headers)
               if AssertionStatusCode.assert_status_code_200(delete_response) == 200:
                     logger.info(f"Tablero eliminado correctamente: {board_id}")

@@ -15,9 +15,9 @@ logger = get_logger("list_fixture")
 def create_test_list(get_token):
     url = EndpointPlanka.BASE_LISTS.value
     TOKEN_PLANKA = get_token
-    payload = json.dumps(PAYLOAD_CREATE_LIST)
+    payload = PAYLOAD_CREATE_LIST
     headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
-    response = PlankaRequests.post(url, headers=headers, data=payload)
+    response = PlankaRequests.post(url,headers,payload)
     data = response.json()
     list_id = data["item"]["id"]
     yield list_id

@@ -7,9 +7,6 @@ from utils.logger_helper import log_request_response
 from src.routes.request import PlankaRequests
 
 
-
-
-
 @pytest.mark.list
 @pytest.mark.smoke
 @pytest.mark.functional_positive
