@@ -2,6 +2,9 @@ name: CI - Run API tests
 
 #Define eventos que activan el workflow 
 on:
+  push:
+    branches:
+      - daniela        # Se ejecuta cada vez que haces push en la rama daniela
   #Habilita la ejecucion manual del workflow desde el boton "Run Workflow" en GitHub Actions
   workflow_dispatch:
     inputs:
