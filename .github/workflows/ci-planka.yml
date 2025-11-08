@@ -74,12 +74,14 @@ jobs:
 
 
       # paso 6: Generar reporte HTML usando la acción oficial de Allure
-      - name: Build test report
-        uses: simple-elf/allure-report-action@v1.7
+      - name: Generar Reporte Allure
+        uses: simple-elf/allure-report-action@v1.6        
         if: always()
         with:
-          gh_pages: gh-pages
           allure_results: reports/allure-results
           allure_history: allure-history
+          allure_report: reports/allure-report
+          gh_pages: gh-pages
+          allure-version: 2.20.1
 
     
