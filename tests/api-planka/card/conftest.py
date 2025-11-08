@@ -3,7 +3,6 @@ import pytest
 from src.resources.payloads.card_payloads import PAYLOAD_CREATE_CARD
 from src.routes.endpoint import EndpointPlanka
 from src.routes.request import PlankaRequests
-from src.assertions.status_code_assertion import AssertionStatusCode
 from utils.logger_helper import get_logger
 
 

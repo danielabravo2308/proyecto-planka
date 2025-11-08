@@ -1,7 +1,6 @@
 
 import pytest
 from src.routes.endpoint import EndpointPlanka
-from src.assertions.status_code_assertion import AssertionStatusCode
 from src.routes.request import PlankaRequests
 from src.resources.payloads.board_payloads import PAYLOAD_BOARD_CREATE 
 from utils.logger_helper import get_logger
