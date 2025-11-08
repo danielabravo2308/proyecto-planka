@@ -1,9 +1,11 @@
-import requests
+
 import json
 import pytest
 from config import BASE_URI
 from src.resources.payloads.card_payloads import PAYLOAD_CREATE_CARD
 from src.routes.endpoint import EndpointPlanka
+from src.routes.request import PlankaRequests
+from src.assertions.status_code_assertion import AssertionStatusCode
 from utils.logger_helper import get_logger
 
 
@@ -14,11 +16,8 @@ def post_card(get_token):
     url = EndpointPlanka.BASE_CARDS.value
     TOKEN_PLANKA = get_token
     payload = json.dumps(PAYLOAD_CREATE_CARD)
-    headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-    }
-
-    response = requests.post(url, headers=headers, data=payload)
+    headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+    response = PlankaRequests.post(url, headers=headers, data=payload)
     data = response.json()
     card_id = data["item"]["id"]
     yield card_id
@@ -35,12 +34,10 @@ def setup_add_card(get_token):
     for card in created_cards:
         card_id = card.get("item", {}).get("id")
         try:
-            delete_url = f"{BASE_URI}/cards/{card_id}"
-            headers = {
-                    'Authorization': f'Bearer {get_token}'
-                } 
-            delete_response = requests.delete(delete_url,headers=headers)
-            if delete_response.status_code == 200:
+            delete_url = f"{EndpointPlanka.BASE_CARD_MAJOR.value}/{card_id}"
+            headers = {'Authorization': f'Bearer {get_token}'} 
+            delete_response = PlankaRequests.delete(delete_url,headers=headers)
+            if AssertionStatusCode.assert_status_code_200(delete_response) == 200:
                      logger.info(f"Tarjeta eliminado correctamente: {card_id}")
             else:
                     logger.error(f" No se pudo eliminar el tarjeta {card_id}. ")

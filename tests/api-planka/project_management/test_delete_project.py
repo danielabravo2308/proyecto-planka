@@ -1,9 +1,11 @@
-import requests
+
 import pytest
 from config import TOKEN_INVALID , ID_PROJECT_INVALID_STRING,ID_PROJECT_NOT_EXISTS,ID_PROJECT_EMPTY 
 from src.routes.endpoint import EndpointPlanka
 from src.assertions.status_code_assertion import AssertionStatusCode
 from utils.logger_helper import log_request_response
+from src.routes.request import PlankaRequests
+
 
 
 
@@ -17,11 +19,8 @@ def test_TC015_delete_project_with_valid_token(get_token,create_test_project):
     ID_PROJECT = project_id
     url = f"{EndpointPlanka.BASE_PROJECTS.value}/{ID_PROJECT}"
     TOKEN_PLANKA = get_token
-    headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-    }
-
-    response = requests.delete(url, headers=headers)
+    headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+    response = PlankaRequests.delete(url,headers)
     log_request_response(url, response, headers)
     AssertionStatusCode.assert_status_code_200(response)
 
@@ -35,11 +34,8 @@ def test_TC016_delete_project_with_invalid_token(create_test_project):
    project_id = create_test_project
    ID_PROJECT = project_id
    url = f"{EndpointPlanka.BASE_PROJECTS.value}/{ID_PROJECT}"
-   headers = {
-    'Authorization': f'Bearer {TOKEN_INVALID}'
-    }
-
-   response = requests.delete(url,headers=headers)
+   headers = {'Authorization': f'Bearer {TOKEN_INVALID}'}
+   response = PlankaRequests.delete(url,headers)
    log_request_response(url, response, headers)
    AssertionStatusCode.assert_status_code_401(response)
 
@@ -52,11 +48,8 @@ def test_TC016_delete_project_with_invalid_token(create_test_project):
 def test_TC017_delete_project_for_id_not_exists(get_token):
    TOKEN_PLANKA = get_token
    url = f"{EndpointPlanka.BASE_PROJECTS.value}/{ID_PROJECT_NOT_EXISTS}"
-   headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-    }
-
-   response = requests.delete(url,headers=headers)
+   headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+   response = PlankaRequests.delete(url,headers)
    log_request_response(url, response, headers)
    AssertionStatusCode.assert_status_code_400_or_404(response)
 
@@ -69,11 +62,8 @@ def test_TC017_delete_project_for_id_not_exists(get_token):
 def test_TC018_delete_project_for_id_invalid_empty(get_token):
    TOKEN_PLANKA = get_token
    url = f"{EndpointPlanka.BASE_PROJECTS.value}/{ID_PROJECT_EMPTY}"
-   headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-    }
-
-   response = requests.delete(url,headers=headers)
+   headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+   response = PlankaRequests.delete(url,headers)
    log_request_response(url, response, headers)
    AssertionStatusCode.assert_status_code_404(response)
 
@@ -87,11 +77,8 @@ def test_TC018_delete_project_for_id_invalid_empty(get_token):
 def test_TC019_delete_project_for_id_invalid_string(get_token):
    TOKEN_PLANKA = get_token
    url = f"{EndpointPlanka.BASE_PROJECTS.value}/{ID_PROJECT_INVALID_STRING}"
-   headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-    }
-
-   response = requests.delete(url,headers=headers)
+   headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+   response = PlankaRequests.delete(url,headers)
    log_request_response(url, response, headers)
    AssertionStatusCode.assert_status_code_400(response)
 

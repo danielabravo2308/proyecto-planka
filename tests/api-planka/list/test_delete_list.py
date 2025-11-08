@@ -1,9 +1,12 @@
-import requests
+
 import pytest
 from config import TOKEN_INVALID ,ID_LIST_NOT_EXISTS,ID_LIST_EMPTY,ID_LIST_INVALID_STRING
 from src.routes.endpoint import EndpointPlanka
 from src.assertions.status_code_assertion import AssertionStatusCode
 from utils.logger_helper import log_request_response
+from src.routes.request import PlankaRequests
+
+
 
 
 
@@ -15,11 +18,8 @@ def test_TC025_delete_list_with_valid_token(get_token , create_test_list):
     ID_LIST = create_test_list
     TOKEN_PLANKA = get_token
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{ID_LIST}"
-    headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-    
-    }
-    response = requests.delete(url, headers=headers)
+    headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+    response = PlankaRequests.delete(url,headers)
     log_request_response(url, response, headers)
     AssertionStatusCode.assert_status_code_200(response)
 
@@ -32,11 +32,8 @@ def test_TC025_delete_list_with_valid_token(get_token , create_test_list):
 def test_TC026_delete_list_with_invalid_token(create_test_list):
     ID_LIST = create_test_list
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{ID_LIST}"
-    headers = {
-    'Authorization': f'Bearer {TOKEN_INVALID}'
-    
-    }
-    response = requests.delete(url, headers=headers)
+    headers = {'Authorization': f'Bearer {TOKEN_INVALID}'}
+    response = PlankaRequests.delete(url,headers)
     log_request_response(url, response, headers)
     AssertionStatusCode.assert_status_code_401(response)
 
@@ -49,11 +46,8 @@ def test_TC026_delete_list_with_invalid_token(create_test_list):
 @pytest.mark.equivalence_partition
 def test_TC027_delete_list_with_id_list_not_exists():
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{ID_LIST_NOT_EXISTS}"
-    headers = {
-    'Authorization': f'Bearer {TOKEN_INVALID}'
-    
-    }
-    response = requests.delete(url, headers=headers)
+    headers = {'Authorization': f'Bearer {TOKEN_INVALID}'}
+    response = PlankaRequests.delete(url,headers)
     log_request_response(url, response, headers)
     AssertionStatusCode.assert_status_code_401(response)
  
@@ -65,11 +59,8 @@ def test_TC027_delete_list_with_id_list_not_exists():
 @pytest.mark.equivalence_partition
 def test_TC028_delete_list_with_id_list_empty():
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{ID_LIST_EMPTY}"
-    headers = {
-    'Authorization': f'Bearer {TOKEN_INVALID}'
-    
-    }
-    response = requests.delete(url, headers=headers)
+    headers = {'Authorization': f'Bearer {TOKEN_INVALID}'}
+    response = PlankaRequests.delete(url,headers)
     log_request_response(url, response, headers)
     AssertionStatusCode.assert_status_code_404(response)
 
@@ -81,11 +72,8 @@ def test_TC028_delete_list_with_id_list_empty():
 @pytest.mark.equivalence_partition
 def test_TC029_delete_list_with_id_list_invalid():
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{ID_LIST_INVALID_STRING}"
-    headers = {
-    'Authorization': f'Bearer {TOKEN_INVALID}'
-    
-    }
-    response = requests.delete(url, headers=headers)
+    headers = {'Authorization': f'Bearer {TOKEN_INVALID}'}
+    response = PlankaRequests.delete(url,headers)
     log_request_response(url, response, headers)
     AssertionStatusCode.assert_status_code_401(response)
 

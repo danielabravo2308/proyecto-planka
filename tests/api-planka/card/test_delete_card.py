@@ -1,9 +1,11 @@
-import requests
+
 import pytest
 from config import TOKEN_INVALID , ID_CARD_NOT_EXISTS , ID_CARD_EMPTY,ID_CARD_INVALID_STRING
 from src.routes.endpoint import EndpointPlanka
 from src.assertions.status_code_assertion import AssertionStatusCode
 from utils.logger_helper import log_request_response
+from src.routes.request import PlankaRequests
+
 
 
 @pytest.mark.card
@@ -14,11 +16,8 @@ def test_TC024_delete_card_with_valid_token(get_token,post_card):
   ID_CARD = post_card
   TOKEN_PLANKA = get_token
   url = f"{EndpointPlanka.BASE_CARD_MAJOR.value}/{ID_CARD}"
-  headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-  }
-
-  response = requests.delete(url, headers=headers)
+  headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+  response = PlankaRequests.delete(url,headers)
   log_request_response(url, response, headers)
   AssertionStatusCode.assert_status_code_200(response)
 
@@ -29,11 +28,8 @@ def test_TC024_delete_card_with_valid_token(get_token,post_card):
 def test_TC025_delete_card_with_invalid_token(post_card): 
   ID_CARD = post_card
   url = f"{EndpointPlanka.BASE_CARD_MAJOR.value}/{ID_CARD}"
-  headers = {
-    'Authorization': f'Bearer {TOKEN_INVALID}'
-  }
-
-  response = requests.delete(url, headers=headers)
+  headers = {'Authorization': f'Bearer {TOKEN_INVALID}'}
+  response = PlankaRequests.delete(url,headers)
   log_request_response(url, response, headers)
   AssertionStatusCode.assert_status_code_401(response)
 
@@ -46,11 +42,8 @@ def test_TC025_delete_card_with_invalid_token(post_card):
 def test_TC026_delete_card_with_nonexistent_id(get_token): 
   TOKEN_PLANKA = get_token
   url = f"{EndpointPlanka.BASE_CARD_MAJOR.value}/{ID_CARD_NOT_EXISTS}"
-  headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-  }
-
-  response = requests.delete(url, headers=headers)
+  headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+  response = PlankaRequests.delete(url,headers)
   log_request_response(url, response, headers)
   AssertionStatusCode.assert_status_code_404(response)
 
@@ -62,11 +55,8 @@ def test_TC026_delete_card_with_nonexistent_id(get_token):
 def test_TC027_delete_card_with_empty_id(get_token): 
   TOKEN_PLANKA = get_token
   url = f"{EndpointPlanka.BASE_CARD_MAJOR.value}/{ID_CARD_EMPTY}"
-  headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-  }
-
-  response = requests.delete(url, headers=headers)
+  headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+  response = PlankaRequests.delete(url,headers)
   log_request_response(url, response, headers)
   AssertionStatusCode.assert_status_code_404(response)
 
@@ -78,10 +68,7 @@ def test_TC027_delete_card_with_empty_id(get_token):
 def test_TC028_delete_card_with_invalid_id(get_token): 
   TOKEN_PLANKA = get_token
   url = f"{EndpointPlanka.BASE_CARD_MAJOR.value}/{ID_CARD_INVALID_STRING}"
-  headers = {
-    'Authorization': f'Bearer {TOKEN_PLANKA}'
-  }
-
-  response = requests.delete(url, headers=headers)
+  headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
+  response = PlankaRequests.delete(url,headers)
   log_request_response(url, response, headers)
   AssertionStatusCode.assert_status_code_400(response)
