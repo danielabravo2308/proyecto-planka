@@ -50,7 +50,7 @@ def test_delete_board_with_token(get_token,post_test_board,use_fixture,token_val
                    id="TC022: delete_board_with_nonexistent_id"),
         
         pytest.param(ID_BOARD_EMPTY,400,
-                   marks=pytest.mark.xfail(reason="BUG007: BUG004: Código HTTP incorrecto se retorna 404 en lugar de 400 al consultar un recurso vacio"),
+                   marks=pytest.mark.xfail(reason="BUG007: Código HTTP incorrecto se retorna 404 en lugar de 400 al consultar un recurso vacio"),
                    id="TC023: delete_board_with_empty_id"),
         
         pytest.param(ID_BOARD_INVALID_STRING,400,

@@ -48,15 +48,15 @@ def test_delete_project_with_token(get_token,create_test_project,use_fixture,tok
 @pytest.mark.parametrize(
    "id_project,expected_status",[
          pytest.param(ID_PROJECT_NOT_EXISTS,404,
-                  marks=pytest.mark.xfail(reason="BUG21:Código HTTP incorrecto se retorna 400 en lugar de 404 al consultar un recurso inexistente"),
+                  marks=pytest.mark.xfail(reason="BUG021:Código HTTP incorrecto se retorna 400 en lugar de 404 al consultar un recurso inexistente"),
                   id="TC017: delete_project_with_id_not_exists"),
 
          pytest.param(ID_PROJECT_EMPTY,400,
-                  marks=pytest.mark.xfail(reason="BUG22:Código HTTP incorrecto se retorna 404 en lugar de 400 al consultar un recurso vacio"),
+                  marks=pytest.mark.xfail(reason="BUG022:Código HTTP incorrecto se retorna 404 en lugar de 400 al consultar un recurso vacio"),
                   id="TC018: delete_project_with_id_empty"),
 
-         pytest.param(ID_PROJECT_EMPTY,400,
-                  marks=pytest.mark.xfail(reason="BUG23:Código HTTP incorrecto se retorna 404 en lugar de 400 al consultar un recurso inexistente"),
+         pytest.param(ID_PROJECT_INVALID_STRING,404,
+                  marks=pytest.mark.xfail(reason="BUG023:Código HTTP incorrecto se retorna 404 en lugar de 400 al consultar un recurso invalido"),
                   id="TC019: delete_project_with_id_invalid_string")
   ])
 
