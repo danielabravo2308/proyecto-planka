@@ -52,7 +52,7 @@ jobs:
          echo "Esperando a que Planka arranque..."
          until curl --silent --fail http://localhost:3000 > /dev/null; do
             echo "esperando..."
-            sleep 15
+            sleep 25
          done
          echo "Planka está en línea"
 
