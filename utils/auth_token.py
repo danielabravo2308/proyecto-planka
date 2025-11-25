@@ -20,6 +20,9 @@ def generate_token():
     headers = {'Content-Type': 'application/json'}
     response = PlankaRequests.post(url, headers, payload)
     response_json = response.json()
+    print("STATUS:", response.status_code)
+    print("RESPONSE:", response.text)
+
     access_token = response_json['item']
     return access_token
 
