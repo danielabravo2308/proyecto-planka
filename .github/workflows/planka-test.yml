@@ -42,26 +42,13 @@ jobs:
 
       - name: Levantar Planka con Docker y esperar
         run: |
-          docker compose up -d
-          echo "Esperando a que Planka arranque..."
-          until curl --silent --fail http://localhost:3000 > /dev/null; do
-            echo "Esperando puerto..."
-            sleep 10
-          done
-          echo "Puerto abierto, esperando usuario admin..."
-          # Espera extra para que Planka inicialice usuario admin
-          sleep 15
-          echo "Planka lista"
-
-      # - name: Levantar Planka con Docker y esperar
-      #   run: |
-      #    docker compose up -d
-      #    echo "Esperando a que Planka arranque..."
-      #    until curl --silent --fail http://localhost:3000 > /dev/null; do
-      #       echo "esperando..."
-      #       sleep 25
-      #    done
-      #    echo "Planka está en línea"
+         docker compose up -d
+         echo "Esperando a que Planka arranque..."
+         until curl --silent --fail http://localhost:3000 > /dev/null; do
+            echo "esperando..."
+            sleep 25
+         done
+         echo "Planka está en línea"
 
       - name: Verificar generación de token
         run: |
