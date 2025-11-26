@@ -1,4 +1,5 @@
 name: CI Pruebas REST PLANKA
+
 on:
   push:
     branches: 
@@ -11,32 +12,75 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+       # Hacer checkout de la rama daniela
+      - name: Checkout code from daniela
         uses: actions/checkout@v4
+        with:
+          ref: daniela  
 
-      - name: Set up Docker Compose
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+            python-version: 3.11
+
+      - name: Establecer variables de entorno desde secrets
         run: |
-          docker compose up -d
+         echo "BASE_URI=${{ secrets.BASE_URI }}" >> $GITHUB_ENV
+         echo "USER_EMAIL=${{ secrets.USER_EMAIL }}" >> $GITHUB_ENV
+         echo "USER_PASSWORD=${{ secrets.USER_PASSWORD }}" >> $GITHUB_ENV
 
-      - name: Set environment variables for tests
+      - name: Verificar variables...
         run: |
-          echo "BASE_URI=http://localhost:3000" >> $GITHUB_ENV
-          echo "USER_EMAIL=${{ secrets.USER_EMAIL }}" >> $GITHUB_ENV
-          echo "USER_PASSWORD=${{ secrets.USER_PASSWORD }}" >> $GITHUB_ENV
+          echo "Email: $USER_EMAIL"
+          echo "Password: $USER_PASSWORD"
 
-      - name: Wait for Planka to be ready
+
+      - name: Limpiar Docker Compose crear admin con nuevas credenciales
+        run: docker compose down -v
+
+
+      - name: Levantar Planka con Docker y esperar
         run: |
-          echo "Esperando Planka..."
-          until $(curl --output /dev/null --silent --head --fail http://localhost:3000); do
-            printf '.'
-            sleep 5
-          done
-          echo "Planka listo."
+         docker compose up -d
+         echo "Esperando a que Planka arranque..."
+         until curl --silent --fail http://localhost:3000 > /dev/null; do
+            echo "esperando..."
+            sleep 25
+         done
+         echo "Planka está en línea"
 
-      - name: Run API tests
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install allure-pytest
+  
+      - name: Ejecutar tests Pytest
+        continue-on-error: true
         env:
-          BASE_URI: ${{ env.BASE_URI }}
-          USER_EMAIL: ${{ env.USER_EMAIL }}
-          USER_PASSWORD: ${{ env.USER_PASSWORD }}
+           BASE_URI: ${{ secrets.BASE_URI }}
+           USER_EMAIL: ${{ secrets.USER_EMAIL }}
+           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
         run: |
-          pytest -v tests/ --alluredir=allure-results
+            pytest -v tests/ --alluredir=allure-results
+
+
+      - name: Generar reporte Allure HTML
+        run: |
+            allure generate allure-results --clean -o allure-report
+
+
+      - name: Publicar Allure en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+
+
+      # - name: Cleanup Docker
+      #   run: docker compose down -v
