@@ -40,8 +40,8 @@ jobs:
           echo "Password: $USER_PASSWORD"
 
 
-      - name: Limpiar Docker Compose crear admin con nuevas credenciales
-        run: docker compose down -v
+      # - name: Limpiar Docker Compose crear admin con nuevas credenciales
+      #   run: docker compose down -v
 
 
       - name: Levantar Planka con Docker y esperar
