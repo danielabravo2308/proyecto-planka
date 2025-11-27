@@ -39,16 +39,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install allure-pytest
+          
 
       - name: Levantar Planka con Docker y esperar
         run: |
+          export USER_EMAIL=${{ secrets.USER_EMAIL }}
+          export USER_PASSWORD=${{ secrets.USER_PASSWORD }}
           docker compose up -d
           echo "Esperando a que Planka arranque..."
           until curl --silent --fail http://localhost:3000 > /dev/null; do
             echo "esperando..."
-            sleep 20
+            sleep 10
           done
-          echo "Planka está en línea"
+  
 
       - name: Generar token de admin
         run: |
