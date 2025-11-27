@@ -46,12 +46,13 @@ services:
       # - DEFAULT_LANGUAGE=en-US
 
       # Do not comment out DEFAULT_ADMIN_EMAIL if you want to prevent this user from being edited/deleted
-      #- DEFAULT_ADMIN_EMAIL=${USER_EMAIL}
-      #- DEFAULT_ADMIN_PASSWORD=${USER_PASSWORD}
-      #- DEFAULT_ADMIN_USERNAME=Daniela Tester
-      - PLANKA_ADMIN_EMAIL: ${{ secrets.USER_EMAIL }}
-      - PLANKA_ADMIN_PASSWORD: ${{ secrets.USER_PASSWORD }}  ### se aumento
-      - PLANKA_ADMIN_NAME: "Admin PLANKA"
+      - DEFAULT_ADMIN_EMAIL=${USER_EMAIL}
+      - DEFAULT_ADMIN_PASSWORD=${USER_PASSWORD}
+      - DEFAULT_ADMIN_USERNAME=Daniela Tester
+      # - PLANKA_ADMIN_EMAIL: ${{ secrets.USER_EMAIL }}
+      # - PLANKA_ADMIN_PASSWORD: ${{ secrets.USER_PASSWORD }}  ### se aumento
+      # - PLANKA_ADMIN_NAME: "Admin PLANKA"
+
 
 
       # Optionally store in secrets - then DEFAULT_ADMIN_PASSWORD should not be set
