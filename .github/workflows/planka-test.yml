@@ -40,9 +40,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install allure-pytest
-
-      - name: Levantar Planka con Docker y esperar
+    
+      - name: Debug env vars
         run: |
+          echo "USER_EMAIL: $USER_EMAIL"
+          echo "USER_PASSWORD: $USER_PASSWORD"
+          echo "BASE_URI: $BASE_URI"
+    
+      - name: Levantar Planka con Docker y esperar
+        env:
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+          BASE_URI: ${{ secrets.BASE_URI }}
+        run: |
+         export USER_EMAIL=${USER_EMAIL}
+         export USER_PASSWORD=${USER_PASSWORD}
+         export BASE_URI=${BASE_URI}
          docker compose up -d
          echo "Esperando a que Planka arranque..."
          until curl --silent --fail http://localhost:3000 > /dev/null; do
@@ -51,7 +64,20 @@ jobs:
          done
          echo "Planka está en línea"
 
-  
+      - name: Inspect user_account table
+        run: |
+          DB_CONTAINER=$(docker ps --format "{{.Names}}" | grep "postgres")
+          echo "DB container: $DB_CONTAINER"
+          docker exec $DB_CONTAINER \
+            psql -U "postgres" -d "planka" \
+            -c "SELECT * FROM user_account;"
+
+      - name: Debug env vars 2
+        run: |
+          echo "USER_EMAIL: $USER_EMAIL"
+          echo "USER_PASSWORD: $USER_PASSWORD"
+          echo "BASE_URI: $BASE_URI"
+    
       - name: Ejecutar tests Pytest
         continue-on-error: true
         run: |
