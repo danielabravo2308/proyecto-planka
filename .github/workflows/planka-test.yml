@@ -65,13 +65,16 @@ jobs:
          done
          echo "Planka está en línea"
 
+      - name: Mostrar logs de Planka
+        run: docker logs $(docker ps -q --filter "ancestor=ghcr.io/plankanban/planka")  
+
 
       - name: Esperar API de Planka (endpoint login)
         run: |
           echo "Esperando a que la API de Planka esté lista..."
-          until curl --silent --fail -X POST http://localhost:3000/api/users/token \
+          until curl --silent --fail -X POST http://localhost:3000/api/access-tokens \
             -H "Content-Type: application/json" \
-            -d "{\"email\": \"test@example.com\", \"password\": \"test\"}" > /dev/null; do
+            -d "{\"email\": \"$USER_EMAIL\", \"password\": \"$USER_PASSWORD"}" > /dev/null; do
               echo "API aún no lista..."
               sleep 10
           done
@@ -83,9 +86,9 @@ jobs:
         run: |
           echo "Haciendo login en Planka..."
 
-          RESPONSE=$(curl -s -X POST http://localhost:3000/api/users/token \
+          RESPONSE=$(curl -s -X POST http://localhost:3000/api/access-tokens \
             -H "Content-Type: application/json" \
-            -d "{\"email\": \"$USER_EMAIL\", \"password\": \"$USER_PASSWORD\"}" )
+            -d "{\"email\": \"$USER_EMAIL\", \"password\": \"$USER_PASSWORD\"}"
 
           echo "Respuesta:"
           echo "$RESPONSE"
