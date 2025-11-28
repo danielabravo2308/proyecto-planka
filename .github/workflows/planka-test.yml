@@ -66,10 +66,10 @@ jobs:
          echo "Planka está en línea"
   
 
-      - name: Ejecutar tests Pytest
-        continue-on-error: true
-        run: |
-          pytest -v tests/ --alluredir=allure-results
+      # - name: Ejecutar tests Pytest
+      #   continue-on-error: true
+      #   run: |
+      #     pytest -v tests/ --alluredir=allure-results
 
 
       - name: Ejecutar tests con pytest y generar reporte Allure
@@ -103,8 +103,8 @@ jobs:
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./reports/allure-report
           publish_branch: report-allure
-          publish_dir: allure-history
    
   
       # - name: Publicar Allure en GitHub Pages
