@@ -12,18 +12,17 @@ from src.routes.request import PlankaRequests
 @pytest.mark.smoke
 @pytest.mark.functional_positive
 @pytest.mark.functional_negative
-@pytest.mark.headers_validation
 @pytest.mark.parametrize(
      "use_fixture,token_value,expected_status",
      [(True,None,200),
       (False,TOKEN_INVALID,401)
      ],
      ids=[
-          "TC020: delete_board_with_valid_token",
-          "TC021: delete_board_with_invalid_token"
+          "test_020: eliminar_tablero_con_token_valido",
+          "test_021: eliminar_tablero_con_token_invalidos"
      ])
 
-def test_delete_board_with_token(get_token,use_fixture,token_value,expected_status,id_board):
+def test_elimimar_tablero(get_token,use_fixture,token_value,expected_status,id_board):
    TOKEN_PLANKA =get_token if use_fixture else token_value
    url = f"{EndpointPlanka.BASE_BOARD_MAJOR.value}/{id_board}"
    headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
@@ -44,18 +43,18 @@ def test_delete_board_with_token(get_token,use_fixture,token_value,expected_stat
 @pytest.mark.parametrize(
    "id_board , expected_status",[
         pytest.param(ID_BOARD_NOT_EXISTS,404,
-                   id="TC022: delete_board_with_nonexistent_id"),
+                   id="test_022: eliminar_tablero_con_id_tablero_no_existente"),
         
         pytest.param(ID_BOARD_EMPTY,400,
                    marks=pytest.mark.xfail(reason="BUG005: Código de respuesta incorrecto de (404) al solicitar eliminar un tablero sin especificar su identificador (ID)"),
-                   id="TC023: delete_board_with_empty_id"),
+                   id="test_023: eliminar_tablero_con_id_tablero_vacio"),
         
         pytest.param(ID_BOARD_INVALID_STRING,400,
                    id="TC024: delete_board_with_invalid_id_type")
 
     ])
 
-def test_delete_board_with_board_id(get_token,id_board,expected_status):
+def test_eliminar_tablero_por_id_tablero(get_token,id_board,expected_status):
    TOKEN_PLANKA = get_token
    url = f"{EndpointPlanka.BASE_BOARD_MAJOR.value}/{id_board}"
    headers = {'Authorization': f'Bearer {TOKEN_PLANKA} '}

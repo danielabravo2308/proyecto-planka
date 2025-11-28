@@ -16,18 +16,17 @@ from src.routes.request import PlankaRequests
 @pytest.mark.smoke
 @pytest.mark.functional_positive
 @pytest.mark.functional_negative
-@pytest.mark.headers_validation
 @pytest.mark.parametrize(
      "use_fixture,token_value,expected_status",
      [(True,None,200),
       (False,TOKEN_INVALID,401)
      ],
      ids=[
-          "TC018: get_list_with_valid_token",
-          "TC019: get_list_with_invalid_token"
+          "test_018: obtener_lista_con_token_valido",
+          "test_019: obtener_lista_con_token_invalido"
      ])
 
-def test_get_list_with_token(get_token,use_fixture,token_value,expected_status,id_list):
+def test_obtener_lista(get_token,use_fixture,token_value,expected_status,id_list):
    TOKEN_PLANKA =get_token if use_fixture else token_value
    url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}"
    headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
@@ -45,7 +44,7 @@ def test_get_list_with_token(get_token,use_fixture,token_value,expected_status,i
 @pytest.mark.list
 @pytest.mark.functional_positive
 @pytest.mark.performance
-def test_TC020_validate_list_response_time(get_token,id_list):   
+def test_020_validar_tiempo_de_respuesta_de_la_solicitud_obtener_lista(get_token,id_list):   
     TOKEN_PLANKA = get_token 
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}"
     headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
@@ -58,8 +57,7 @@ def test_TC020_validate_list_response_time(get_token,id_list):
 @pytest.mark.list
 @pytest.mark.functional_positive
 @pytest.mark.regression
-@pytest.mark.schema_validation
-def test_TC021_validate_list_response_schema(get_token,id_list):   
+def test_021_validar_esquema_de_salida_al_obtener_lista(get_token,id_list):   
     TOKEN_PLANKA = get_token 
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}"
     headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
@@ -81,17 +79,17 @@ def test_TC021_validate_list_response_schema(get_token,id_list):
    "url_id_list,expected_status",
     [
         pytest.param(EndpointPlanka.BASE_LIST_WITH_ID_LIST_NOT_EXISTS.value,404,
-                   id="TC022: get_list_with_nonexistent_list_id"),
+                   id="test_022_obtener_lista_con_id_lista_no_existente"),
 
         pytest.param(EndpointPlanka.BASE_LISTS_WITH_ID_LIST_EMPTY.value,400, 
                    marks=pytest.mark.xfail(reason="BUG0013: La aplicación retorna código 200 y muestra el mensaje : Necesitas habilitar JavaScript para ejecutar esta aplicación"),
-                   id="TC023: get_list_with_empty_list_id"),
+                   id="test_023: obtener_lista_con_id_lista_vacia"),
 
         pytest.param(EndpointPlanka.BASE_LISTS_WITH_ID_LIST_INVALID.value,400,
-                   id="TC024: get_list_with_invalid_list_id_type")  
+                   id="test_024: obtener_lista_con_id_lista_tipo_invalido")  
     ])
 
-def test_get_list_with_id_list_parametrizer(get_token,url_id_list,expected_status):
+def test_obtener_lista_por_id_lista(get_token,url_id_list,expected_status):
     url = url_id_list
     headers = {'Authorization': f'Bearer {get_token}'}
     response = PlankaRequests.get(url,headers)

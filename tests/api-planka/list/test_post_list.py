@@ -14,18 +14,17 @@ from src.routes.request import PlankaRequests
 @pytest.mark.smoke
 @pytest.mark.functional_positive
 @pytest.mark.functional_negative
-@pytest.mark.headers_validation
 @pytest.mark.parametrize(
     "use_fixture,token_value,expected_status",
     [(True,None,200),
      (False,TOKEN_INVALID,401)
     ],
     ids=[
-        "TC001: create_list_with_valid_token",
-        "TC002: create_list_with_invalid_token"
+        "test_001: crear_lista_con_token_valido",
+        "test_002: crear_lista_con_token_invalido"
     ])
 
-def test_create_list_with_token(setup_list,use_fixture,token_value,expected_status,id_board):
+def test_crear_lista(setup_list,use_fixture,token_value,expected_status,id_board):
     get_token, created_lists = (setup_list if use_fixture else (token_value, []))
 
     url = f"{EndpointPlanka.BASE_LISTS.value}/{id_board}/lists"
@@ -46,7 +45,6 @@ def test_create_list_with_token(setup_list,use_fixture,token_value,expected_stat
 @pytest.mark.functional_positive
 @pytest.mark.functional_negative
 @pytest.mark.regression
-@pytest.mark.payload_validation
 @pytest.mark.equivalence_partition
 @pytest.mark.parametrize(
     "payload , expected_status", [
@@ -57,13 +55,13 @@ def test_create_list_with_token(setup_list,use_fixture,token_value,expected_stat
     ],
 
     ids=[
-        "TC003 : create_list_with_type_active",
-        "TC004 : create_list_with_type_closed",
-        "TC005 : create_list_with_type_empty",
-        "TC006 : create_list_with_type_invalid",
+        "test_003 : crear_lista_con_campo_tipo_activo",
+        "test_004 : crear_lista_con_campo_tipo_cerrado",
+        "test_005 : crear_lista_con_campo_tipo_vacio",
+        "test_006 : crear_lista_con_campo_tipo_invalido"
     ])
 
-def test_create_list_with_attribute_type_parametrizer(setup_list,payload,expected_status,id_board):
+def test_crear_lista_con_campo_tipo(setup_list,payload,expected_status,id_board):
     get_token, created_lists = setup_list
     url = f"{EndpointPlanka.BASE_LISTS.value}/{id_board}/lists"
     headers = {'Authorization': f'Bearer {get_token}'}
@@ -82,28 +80,27 @@ def test_create_list_with_attribute_type_parametrizer(setup_list,payload,expecte
 @pytest.mark.list
 @pytest.mark.functional_negative
 @pytest.mark.regression
-@pytest.mark.payload_validation
 @pytest.mark.equivalence_partition
 @pytest.mark.parametrize(
     "payload,expected_status",
     [
         pytest.param(PAYLOAD_CREATE_LIST_EMPTY_POSITION,400,
-                   id="TC007: create_list_with_attribute_position_empty"),
+                   id="test_007: crear_lista_con_campo_posicion_vacio"),
 
         pytest.param(PAYLOAD_CREATE_LIST_INVALID_POSITION,400,
-                  id="TC008: create_list_with_attribute_position_invalid"),
+                  id="test_008: crear_lista_con_campo_posicion_invalido"),
 
 
         pytest.param(PAYLOAD_CREATE_LIST_POSITION_VALUE_NEGATIVE,400,
-                  id="TC009: create_list_with_attribute_position_value_negative"),
+                  id="test_009: crear_lista_con_campo_posicion_valor_negativo"),
 
         pytest.param(PAYLOAD_CREATE_LIST_POSITION_VALUE_EXCEEDS,400,
                  marks=pytest.mark.xfail(reason="BUG011: El campo position permite ingresar numeros sin limite de digitos "),
-                  id="TC010: create_list_with_attribute_position_value_exceeding")
+                  id="test_010: crear_lista_con_campo_posicion_valor_sin_limite")
 
  ])
 
-def test_create_list_with_attribute_position_parametrizer(get_token,payload,expected_status,id_board):
+def test_crear_lista_con_campo_posicion(get_token,payload,expected_status,id_board):
    url = f"{EndpointPlanka.BASE_LISTS.value}/{id_board}/lists"
    headers = {'Authorization': f'Bearer {get_token}'}
    response = PlankaRequests.post(url,headers,payload)
@@ -117,20 +114,19 @@ def test_create_list_with_attribute_position_parametrizer(get_token,payload,expe
 @pytest.mark.list
 @pytest.mark.functional_negative
 @pytest.mark.regression
-@pytest.mark.payload_validation
 @pytest.mark.equivalence_partition
 @pytest.mark.parametrize(
         "payload,expected_status",
         [
             pytest.param(PAYLOAD_CREATE_LIST_EMPTY_NAME,400,
-                    id="TC011: create_list_with_attribute_name_empty"),
+                    id="test_011: crear_lista_con_campo_nombre_vacio"),
 
             pytest.param(PAYLOAD_CREATE_LIST_INVALID_NAME,400,
                     marks=pytest.mark.xfail(reason="BUG012: El campo name permite ingresar valores numericos",run=True),
-                    id="TC012: create_list_with_attribute_name_invalid")
+                    id="test_012: crear_lista_con_campo_nombre_invalido_valor_numerico")
         ])
 
-def test_create_list_with_attribute_name_parametrizer(get_token,payload,expected_status,id_board):
+def test_create_lista_con_campo_nombre(get_token,payload,expected_status,id_board):
     url = f"{EndpointPlanka.BASE_LISTS.value}/{id_board}/lists"
     headers = {'Authorization': f'Bearer {get_token}'}
     response = PlankaRequests.post(url,headers,payload)
@@ -143,8 +139,7 @@ def test_create_list_with_attribute_name_parametrizer(get_token,payload,expected
 @pytest.mark.list
 @pytest.mark.functional_positive
 @pytest.mark.regression
-@pytest.mark.schema_validation
-def test_TC013_validate_list_creation_response_schema(setup_list,id_board):
+def test_013_validar_esquema_de_salida_al_crear_lista(setup_list,id_board):
     get_token,created_lists = setup_list
     url = f"{EndpointPlanka.BASE_LISTS.value}/{id_board}/lists"
     TOKEN_PLANKA = get_token
@@ -160,8 +155,7 @@ def test_TC013_validate_list_creation_response_schema(setup_list,id_board):
 @pytest.mark.list
 @pytest.mark.functional_positive
 @pytest.mark.regression
-@pytest.mark.schema_validation
-def test_TC014_validate_list_creation_request_payload(setup_list,id_board):
+def test_014_validar_esquema_de_entrada_al_crear_lista(setup_list,id_board):
     get_token,created_lists = setup_list
     url = f"{EndpointPlanka.BASE_LISTS.value}/{id_board}/lists"
     TOKEN_PLANKA = get_token
@@ -181,17 +175,17 @@ def test_TC014_validate_list_creation_request_payload(setup_list,id_board):
 @pytest.mark.parametrize(
    "url_id_board,expected_status",[
       pytest.param(EndpointPlanka.BASE_LISTS_WITH_ID_BOARD_NOT_EXISTS.value,404,
-                   id="TC015: create_list_with_id_board_not_exists"),
+                   id="test_015: crear_lista_co_id_tablero_no_existente"),
 
       pytest.param(EndpointPlanka.BASE_LISTS_WITH_ID_BOARD_EMPTY.value,404,
-                   id="TC016: create_list_with_id_board_empty"),
+                   id="test_016: crear_lista_con_id_tablero_vacio"),
       
       pytest.param(EndpointPlanka.BASE_LISTS_WITH_ID_BOARD_INVALID.value,400,
-                   id="TC017: create_list_with_id_board_invalid_type")
+                   id="test_017: crear_lista_con_id_tablero_invalido")
 
    ])
 
-def test_create_list_with_id_board_parametrizer(get_token,url_id_board,expected_status):
+def test_crear_lista_por_id_tablero(get_token,url_id_board,expected_status):
    url = url_id_board
    headers = {'Authorization': f'Bearer {get_token}'}
    response = PlankaRequests.post(url,headers,PAYLOAD_CREATE_LIST)

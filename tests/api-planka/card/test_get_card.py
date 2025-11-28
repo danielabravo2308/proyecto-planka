@@ -13,18 +13,17 @@ from src.routes.request import PlankaRequests
 @pytest.mark.smoke
 @pytest.mark.functional_positive
 @pytest.mark.functional_negative
-@pytest.mark.headers_validation
 @pytest.mark.parametrize(
     "use_fixture,token_value,expected_status",
     [(True,None,200),
      (False,TOKEN_INVALID,401)
     ],
     ids=[
-        "TC017: get_card_with_valid_token",
-        "TC018: get_card_with_invalid_token"
+        "test_017 : obtener_tarjeta_con_token_valido",
+        "test_018 : obtener_tarjeta_con_token_invalido"
     ])
 
-def test_get_card_with_token(get_token,use_fixture,token_value,expected_status,id_card):
+def test_obtener_tarjeta(get_token,use_fixture,token_value,expected_status,id_card):
     TOKEN_PLANKA = (get_token if use_fixture else (token_value))
 
     url = f"{EndpointPlanka.BASE_CARD_MAJOR.value}/{id_card}"
@@ -44,7 +43,7 @@ def test_get_card_with_token(get_token,use_fixture,token_value,expected_status,i
 @pytest.mark.card
 @pytest.mark.functional_positive
 @pytest.mark.performance
-def test_TC019_validate_card_response_time(get_token,id_card):
+def test_019_validar_tiempo_de_respuesta_de_obtener_tarjeta(get_token,id_card):
     url = f"{EndpointPlanka.BASE_CARD_MAJOR.value}/{id_card}"
     TOKEN_PLANKA = get_token
     headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
@@ -61,18 +60,18 @@ def test_TC019_validate_card_response_time(get_token,id_card):
 @pytest.mark.parametrize(
     "url_id_card , expected_status", [
         pytest.param(EndpointPlanka.BASE_CARDS_WITH_ID_CARD_NOT_EXISTS.value,404,
-                   id="TC020: get_card_with_nonexistent_card_id"),
+                   id="test_020: obtener_tarjeta_con_id_tarjeta_inexistente"),
 
         pytest.param(EndpointPlanka.BASE_CARDS_WITH_ID_CARD_VALUE_EMPTY.value,400, 
                    marks=pytest.mark.xfail(reason="BUG009: La aplicación retorna código 200 y muestra el mensaje: Necesitas habilitar JavaScript para ejecutar esta aplicación "),
-                   id="TC021: get_card_with_empty_card_id"),
+                   id="test_021: obtener_tarjeta_con_id_tarjeta_vacia"),
         
         pytest.param(EndpointPlanka.BASE_CARDS_WITH_ID_CARD_VALUE_INVALID.value,400,
-                   id="TC022: get_card_with_invalid_card_id_type")  
+                   id="test_022: obtener_tarjeta_con_id_tarjeta_invalido")  
 
     ])
 
-def test_get_card_with_id_card(get_token,url_id_card,expected_status):
+def test_obtener_tarjeta_por_id_tarjeta(get_token,url_id_card,expected_status):
     url = url_id_card
     headers = {'Authorization': f'Bearer {get_token}'}
     response = PlankaRequests.get(url,headers)

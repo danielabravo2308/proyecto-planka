@@ -14,18 +14,17 @@ from src.routes.request import PlankaRequests
 @pytest.mark.smoke
 @pytest.mark.functional_positive
 @pytest.mark.functional_negative
-@pytest.mark.headers_validation
 @pytest.mark.parametrize(
     "use_fixture,token_value,expected_status",
     [(True,None,200),
      (False,TOKEN_INVALID,401)
     ],
     ids=[
-        "TC001: create_card_with_valid_token",
-        "TC002: create_card_with_invalid_token"
+        "test_001: crear_tarjeta_con_token_valido",
+        "test_002: crear_tarjeta_con_token_invalido"
     ])
 
-def test_create_card_with_token(setup_card,use_fixture,token_value,expected_status,id_list):
+def test_crear_tarjeta(setup_card,use_fixture,token_value,expected_status,id_list):
     get_token, created_cards = (setup_card if use_fixture else (token_value, []))
 
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}/cards"
@@ -45,8 +44,7 @@ def test_create_card_with_token(setup_card,use_fixture,token_value,expected_stat
 @pytest.mark.card
 @pytest.mark.functional_positive
 @pytest.mark.regression
-@pytest.mark.payload_validation
-def test_TC003_validate_card_creation_request_payload(setup_card,id_list):
+def test_003_validar_esquema_de_entrada_de_datos_al_crear_tarjeta(setup_card,id_list):
     get_token,created_cards = setup_card
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}/cards"
     TOKEN_PLANKA = get_token
@@ -62,7 +60,6 @@ def test_TC003_validate_card_creation_request_payload(setup_card,id_list):
 @pytest.mark.card
 @pytest.mark.functional_positive
 @pytest.mark.regression
-@pytest.mark.payload_validation
 @pytest.mark.equivalence_partition
 @pytest.mark.parametrize(
     "payload , expected_status",
@@ -72,13 +69,13 @@ def test_TC003_validate_card_creation_request_payload(setup_card,id_list):
      (PAYLOAD_CREATE_CARD_TYPE_INVALID,400)
     ],
     ids=[
-        "TC004: create_card_with_type_project",
-        "TC005: create_card_with_type_story",
-        "TC006: create_card_with_type_empty",
-        "TC007: create_card_with_type_invalid" 
+        "test_004: crear_tarjeta_con_campo_tipo_projecto",
+        "test_005: crear_tarjeta_con_campo_tipo_historia",
+        "test_006: crear_tarjeta_con_campo_tipo_empty",
+        "test_007: crear_tarjeta_con_campo_tipo_invalido" 
     ])
 
-def test_post_card_validate_attribute_with_type(setup_card,payload,expected_status,id_list):
+def test_crear_tarjeta_con_tipo_de_tarjeta(setup_card,payload,expected_status,id_list):
     get_token,created_cards = setup_card
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}/cards"
     headers = {'Authorization': f'Bearer {get_token}'}
@@ -95,26 +92,25 @@ def test_post_card_validate_attribute_with_type(setup_card,payload,expected_stat
 @pytest.mark.card
 @pytest.mark.functional_negative
 @pytest.mark.regression
-@pytest.mark.payload_validation
 @pytest.mark.equivalence_partition
 @pytest.mark.parametrize(
     "payload , expected_status",
     [
         pytest.param(PAYLOAD_CREATE_CARD_POSITION_EMPTY,400,
-                   id="TC008: create_card_with_attribute_position_empty"),
+                   id="test_008: crear_tarjeta_con_campo_posicion_vacio"),
 
         pytest.param(PAYLOAD_CREATE_CARD_POSITION_INVALID,400,
-                  id="TC009: create_card_with_attribute_position_invalid"),
+                  id="test_009: crear_tarjeta_con_campo_posicion_invalido"),
 
         pytest.param(PAYLOAD_CREATE_CARD_POSITION_VALUE_NEGATIVE,400,
-                  id="TC010: create_card_with_attribute_position_value_negative"),
+                  id="test_010: crear_tarjeta_con_campo_posicion_valor_negativo"),
 
         pytest.param( PAYLOAD_CREATE_CARD_POSITION_DIGITS_EXCEEDS,400,
                  marks=pytest.mark.xfail(reason="BG006: El campo position permite ingresar numeros sin limite de digitos"),
-                 id="TC011: create_card_with_attribute_position_value_exceeding")
+                 id="test_011: crear_tarjeta_con_campo_posicion_digitos_excedidos")
     ])
 
-def test_post_card_validate_attribute_with_position(get_token,payload,expected_status,id_list):
+def test_crear_tarjeta_con_campo_posicion(get_token,payload,expected_status,id_list):
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}/cards"
     headers = {'Authorization': f'Bearer {get_token}'}
     response = PlankaRequests.post(url,headers,payload)
@@ -129,19 +125,18 @@ def test_post_card_validate_attribute_with_position(get_token,payload,expected_s
 @pytest.mark.card
 @pytest.mark.functional_negative
 @pytest.mark.regression
-@pytest.mark.payload_validation
 @pytest.mark.equivalence_partition
 @pytest.mark.parametrize(
     "payload , expected_status", [
         pytest.param(PAYLOAD_CREATE_CARD_NAME_EMPTY,400,
-                   id="TC012: create_card_with_attribute_name_empty"),
+                   id="test_012: crear_tarjeta_con_campo_nombre_vacio"),
 
         pytest.param(PAYLOAD_CREATE_CARD_NAME_INVALID,400,
                   marks=pytest.mark.xfail(reason="BUG007: El campo name permite ingresar valores numericos"),
-                  id="TC013: create_card_with_attribute_name_invalid")
+                  id="test_013: crear_tarjeta_con_campo_nombre_invalido")
     ])
 
-def test_post_card_validate_attribute_with_name(get_token,payload,expected_status,id_list):
+def test_crear_tarjeta_con_campo_nombre(get_token,payload,expected_status,id_list):
     url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}/cards"
     headers = {'Authorization': f'Bearer {get_token}'}
     response = PlankaRequests.post(url,headers,payload)
@@ -157,18 +152,18 @@ def test_post_card_validate_attribute_with_name(get_token,payload,expected_statu
 @pytest.mark.parametrize(
     "url_id_list , expected_status", [
         pytest.param(EndpointPlanka.BASE_CARD_WITH_ID_LIST_NOT_EXISTS.value,404,
-                   id="TC014: create_card_with_nonexistent_list_id"),
+                   id="test_014: crear_tarjeta_con_id_lista_inexistente"),
         
         pytest.param(EndpointPlanka.BASE_CARD_WITH_ID_LIST_EMPTY.value,400,
                    marks=pytest.mark.xfail(reason="BUG008: Código HTTP incorrecto se retorna 404 en lugar de 400 al consultar un recurso vacio"),
-                   id="TC015: create_card_with_empty_list_id"),
+                   id="test_015: crear_tarjeta_con_id_lista_vacia"),
         
         pytest.param(EndpointPlanka.BASE_CARD_WITH_ID_LIST_INVALID.value,400,
-                   id="TC016: create_card_with_invalid_list_id"),
+                   id="test_016: crear_tarjeta_con_id_lista_invalido"),
 
     ])
 
-def test_post_card_with_list_id(get_token,url_id_list,expected_status):
+def test_crear_tarjeta_por_id_lista(get_token,url_id_list,expected_status):
     url = url_id_list
     headers = {'Authorization': f'Bearer {get_token}'}
     response = PlankaRequests.post(url,headers,PAYLOAD_CREATE_CARD)

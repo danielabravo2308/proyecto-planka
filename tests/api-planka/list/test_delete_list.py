@@ -11,18 +11,17 @@ from src.routes.request import PlankaRequests
 @pytest.mark.smoke
 @pytest.mark.functional_positive
 @pytest.mark.functional_negative
-@pytest.mark.headers_validation
 @pytest.mark.parametrize(
      "use_fixture,token_value,expected_status",
      [(True,None,200),
       (False,TOKEN_INVALID,401)
      ],
      ids=[
-          "TC025: delete_list_with_valid_token",
-          "TC026: delete_list_with_invalid_token"
+          "test_025: eliminar_lista_con_token_valido",
+          "test_026: eliminar_lista_con_token_invalido"
      ])
 
-def test_delete_list_with_token(get_token,use_fixture,token_value,expected_status,id_list):
+def test_eliminar_lista(get_token,use_fixture,token_value,expected_status,id_list):
    TOKEN_PLANKA =get_token if use_fixture else token_value
    url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list}"
    headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
@@ -44,17 +43,17 @@ def test_delete_list_with_token(get_token,use_fixture,token_value,expected_statu
 @pytest.mark.parametrize(
    "id_list_actual,expected_status",[
       pytest.param(ID_LIST_NOT_EXISTS,404,
-                   id="TC027: delete_list_with_id_not_exists"),
+                   id="test_027: eliminar_lista_con_id_lista_no_existente"),
 
       pytest.param(ID_LIST_EMPTY,404,
-                   id="TC028: delete_list_with_id_empty"),
+                   id="test_028: eliminar_lista_con_id_lista_vacia"),
       
       pytest.param(ID_LIST_INVALID_STRING,400,
-                   id="TC029: delete_list_with_id_invalid_string")
+                   id="test_029: eliminar_lista_con_id_lista_tipo_invalido")
 
    ])
 
-def test_delete_list_with_id_parametrizer(get_token,id_list_actual,expected_status):
+def test_eliminar_lista_por_id_lista(get_token,id_list_actual,expected_status):
    TOKEN_PLANKA = get_token
    url = f"{EndpointPlanka.BASE_LIST_MAJOR.value}/{id_list_actual}"
    headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}

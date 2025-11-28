@@ -13,7 +13,6 @@ from src.routes.request import PlankaRequests
 @pytest.mark.functional_positive
 @pytest.mark.functional_negative
 @pytest.mark.smoke
-@pytest.mark.headers_validation
 @pytest.mark.equivalence_partition
 @pytest.mark.parametrize(
      "use_fixture,token_value,expected_status",
@@ -21,11 +20,12 @@ from src.routes.request import PlankaRequests
       (False,TOKEN_INVALID,401)
      ],
      ids=[
-          "TC015: delete_project_with_valid_token",
-          "TC016: delete_project_with_invalid_token"
+          "test_015: eliminar_proyecto_con_token_valido",
+          "test_016: eliminar_proyecto_con_token_invalido"
+          
      ])
 
-def test_delete_project_with_token(get_token,use_fixture,token_value,expected_status,id_project):
+def test_eliminar_proyecto(get_token,use_fixture,token_value,expected_status,id_project):
    TOKEN_PLANKA =get_token if use_fixture else token_value
    url = f"{EndpointPlanka.BASE_PROJECTS.value}/{id_project}"
    headers = {'Authorization': f'Bearer {TOKEN_PLANKA}'}
@@ -43,20 +43,19 @@ def test_delete_project_with_token(get_token,use_fixture,token_value,expected_st
 @pytest.mark.functional_negative
 @pytest.mark.regression
 @pytest.mark.equivalence_partition
-
 @pytest.mark.parametrize(
    "id_project,expected_status",[
          pytest.param(ID_PROJECT_NOT_EXISTS,400,
-                  id="TC017: delete_project_with_id_not_exists"),
+                  id="test_017: eliminar_proyecto_con_id_proyecto_no_existente"),
 
          pytest.param(ID_PROJECT_EMPTY,404,
-                  id="TC018: delete_project_with_id_empty"),
+                  id="test_018: eliminar_proyecto_con_id_proyecto_vacio"),
 
          pytest.param(ID_PROJECT_INVALID_STRING,400,
-                  id="TC019: delete_project_with_id_invalid_string")
+                  id="test_019: eliminar_proyecto_con_id_proyecto_invalido_valor_cadena")
   ])
 
-def test_delete_project_with_id_parametrizer(get_token,id_project,expected_status):
+def test_eliminar_proyecto_por_id_proyecto(get_token,id_project,expected_status):
    url = f"{EndpointPlanka.BASE_PROJECTS.value}/{id_project}"
    headers = {'Authorization': f'Bearer {get_token}'}
    response = PlankaRequests.delete(url,headers)

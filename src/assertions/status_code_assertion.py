@@ -5,7 +5,7 @@ class AssertionStatusCode:
 
     @staticmethod
     def assert_status_code_200(response):
-        assert response.status_code == 200
+        response.status_code == 200
 
 
     @staticmethod

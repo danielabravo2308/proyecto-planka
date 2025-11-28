@@ -49,16 +49,3 @@ def get_logger(name="test_logger"):
 
     return logger
   
-# def get_logger(name="test_logger"):
-#     logger = logging.getLogger(name)
-#     logger.setLevel(logging.DEBUG)
-#     logger.propagate = False
-#     if not logger.handlers:
-#         handler = logging.StreamHandler()
-#         formatter = logging.Formatter(
-#             "%(asctime)s | %(levelname)s | %(message)s"
-#         )
-#         handler.setFormatter(formatter)
-#         logger.addHandler(handler)
-
-#     return logger
