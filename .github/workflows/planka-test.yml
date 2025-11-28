@@ -91,7 +91,7 @@ jobs:
           echo "Respuesta:"
           echo "$RESPONSE"
 
-          TOKEN=$(echo $RESPONSE | jq -r '.token')
+          TOKEN=$(echo $RESPONSE | jq -r '.item.token')
 
           if [ "$TOKEN" = "null" ] || [ -z "$TOKEN" ]; then
             echo "❌ ERROR: No se pudo obtener token de Planka."
