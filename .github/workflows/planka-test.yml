@@ -12,6 +12,7 @@ on:
         required: true
         type: choice
         options:
+          - ""
           - smoke
           - regression
           - functional_positive
@@ -25,6 +26,7 @@ on:
         required: true
         type: choice
         options:
+          - ""
           - project_management
           - board
           - list
@@ -98,17 +100,26 @@ jobs:
          done
          echo "Planka está en línea"
 
-
-
-      - name: Ejecutar tests con pytest y generar reporte Allure
+      - name: Ejecutar Pytest por marker
         run: |
-          if [ -n "${{ github.event.inputs.marker }}" ]; then
-            echo "Ejecutando pytest con marker: ${{ github.event.inputs.marker }}"
-            pytest --disable-warnings -v ${{ github.event.inputs.marker }} --alluredir=reports/allure-results
-          else
-            echo "Ejecutando todos los tests"
-            pytest --disable-warnings -v --alluredir=reports/allure-results
-          fi
+           if [ -n "${{ github.event.inputs.marker }}" ]; then
+              echo "Ejecutando pytest con marker: ${{ github.event.inputs.marker }}"
+              pytest -m "${{ github.event.inputs.marker }}" --disable-warnings -v --alluredir=reports/allure-results
+            else
+                echo "Ejecutando todos los tests"
+                pytest --disable-warnings -v --alluredir=reports/allure-results
+            fi
+
+
+      # - name: Ejecutar tests con pytest y generar reporte Allure
+      #   run: |
+      #     if [ -n "${{ github.event.inputs.marker }}" ]; then
+      #       echo "Ejecutando pytest con marker: ${{ github.event.inputs.marker }}"
+      #       pytest --disable-warnings -v ${{ github.event.inputs.marker }} --alluredir=reports/allure-results
+      #     else
+      #       echo "Ejecutando todos los tests"
+      #       pytest --disable-warnings -v --alluredir=reports/allure-results
+      #     fi
 
       - name: Obtener historial de gh-pages
         uses: actions/checkout@v4
