@@ -6,11 +6,36 @@ on:
     - main 
     - daniela
   workflow_dispatch:
+     # inputs:
+     #  marker:
+     #    description: 'Marker de pytest a ejecutar (ej:smoke,functional_positive,functional_negative,regression,performance)'
+     #    required: false
+     #    default: ''
+
      inputs:
-      marker:
-        description: 'Marker de pytest a ejecutar (ej:smoke,functional_positive,functional_negative,regression,performance)'
-        required: false
-        default: ''
+      tipo_prueba:
+        description: "Selecciona el tipo de prueba"
+        required: true
+        type: choice
+        options:
+          - smoke
+          - regression
+          - functional_positive
+          - functional_negative
+          - performance
+          - equivalence_partition
+
+      inputs:
+      modulo_evaluado:
+        description: "Seleccionar modulo"
+        required: true
+        type: choice
+        options:
+          - project_management
+          - board
+          - list
+          - card
+       
 
   schedule:
     # Scheduled the execution.
