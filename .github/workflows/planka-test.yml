@@ -1,0 +1,115 @@
+name: CI Pruebas REST PLANKA
+
+on:
+  push:
+    branches: 
+    - main 
+    - daniela
+  workflow_dispatch:
+     inputs:
+      marker:
+        description: 'Marker de pytest a ejecutar (ej:smoke,functional_positive,functional_negative,regression,performance)'
+        required: false
+        default: ''
+
+  schedule:
+    # Scheduled the execution.
+    # Every day at 22:00 PM (Bolivia GTM-4).
+    # All the cron job in GitHub Actions is in UTC(1:00 AM).
+    - cron: '0 1 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # To push a branch (gh_pages).
+
+    steps:
+       # Hacer checkout de la rama daniela
+      - name: Checkout code from daniela
+        uses: actions/checkout@v4
+        with:
+          ref: daniela  
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+            python-version: 3.11
+
+      - name: Establecer variables de entorno desde secrets
+        run: |
+         echo "BASE_URI=${{ secrets.BASE_URI }}" >> $GITHUB_ENV
+         echo "USER_EMAIL=${{ secrets.USER_EMAIL }}" >> $GITHUB_ENV
+         echo "USER_PASSWORD=${{ secrets.USER_PASSWORD }}" >> $GITHUB_ENV
+
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+        
+      - name: Instalar Allure CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y default-jre
+          npm install -g allure-commandline --save-dev
+         
+    
+      - name: Levantar Planka con Docker y esperar
+        env:
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+          BASE_URI: ${{ secrets.BASE_URI }}
+        run: |
+         export USER_EMAIL=${USER_EMAIL}
+         export USER_PASSWORD=${USER_PASSWORD}
+         export BASE_URI=${BASE_URI}
+         docker compose up -d
+         echo "Esperando a que Planka arranque..."
+         until curl --silent --fail http://localhost:3000 > /dev/null; do
+            echo "esperando..."
+            sleep 25
+         done
+         echo "Planka está en línea"
+
+
+
+      - name: Ejecutar tests con pytest y generar reporte Allure
+        run: |
+          if [ -n "${{ github.event.inputs.marker }}" ]; then
+            echo "Ejecutando pytest con marker: ${{ github.event.inputs.marker }}"
+            pytest --disable-warnings -v ${{ github.event.inputs.marker }} --alluredir=reports/allure-results
+          else
+            echo "Ejecutando todos los tests"
+            pytest --disable-warnings -v --alluredir=reports/allure-results
+          fi
+
+      - name: Obtener historial de gh-pages
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generar reporte Allure
+        uses: simple-elf/allure-report-action@master
+        id: allure
+        with:
+          allure_results: reports/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+
+      - name: Publicar Reporte en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
