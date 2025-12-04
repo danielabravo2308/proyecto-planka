@@ -1,0 +1,12 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects HTTP/1.1" 200 515
+INFO     fixture:conftest.py:39 Setup iniciado para creación de proyectos
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "DELETE /api/projects/1657742809605604431 HTTP/1.1" 200 332
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/projects/1657742809605604431
+INFO     root:logger_helper.py:15 STATUS CODE: 200
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEyMWY4ZTc0LTQ4YWQtNDc4MS1iZmI4LTVmNmNkZjQyNTQ4ZiJ9.eyJpYXQiOjE3NjQ4MDk5NDEsImV4cCI6MTc5NjM0NTk0MSwic3ViIjoiMTY1Nzc0MjU4NzkyODI0OTM0NSJ9.Isf1pTAzyAK6_-f4vc1pXedoWpaVB_1Xh4JCCo-oEzg"
+}
