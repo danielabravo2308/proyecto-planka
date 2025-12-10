@@ -1,0 +1,1 @@
+2025-12-10 02:53:52,970 | INFO | fixture | Setup iniciado para creación de proyectos
