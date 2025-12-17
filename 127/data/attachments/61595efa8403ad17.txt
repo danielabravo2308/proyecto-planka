@@ -1,2 +1,0 @@
-2025-12-04 00:46:34,980 | INFO | project_fixture | Setup iniciado para creación de proyectos
-2025-12-04 00:46:34,985 | INFO | project_fixture | No hay proyectos creados para eliminar.
