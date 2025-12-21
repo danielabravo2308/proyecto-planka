@@ -1,0 +1,2 @@
+2025-12-21 03:00:17,293 | INFO | list_fixture | Setup iniciado para creación de listas
+2025-12-21 03:00:17,300 | INFO | list_fixture | No hay listas creadas para eliminar.
