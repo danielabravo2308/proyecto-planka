@@ -1,0 +1,4 @@
+2025-12-27 02:52:08,835 | INFO | fixture | Setup iniciado para creación de proyectos
+2025-12-27 02:52:08,853 | INFO | list_fixture | Setup iniciado para creación de listas
+2025-12-27 02:52:08,869 | INFO | list_fixture | Iniciando teardown: Eliminación de listas...
+2025-12-27 02:52:08,884 | INFO | list_fixture | Lista eliminada correctamente: 1674469578815571034
