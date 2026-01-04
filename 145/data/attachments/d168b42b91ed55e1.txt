@@ -1,1 +1,0 @@
-2025-12-15 03:00:19,305 | INFO | fixture | Setup iniciado para creación de proyectos
