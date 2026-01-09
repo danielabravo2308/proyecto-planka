@@ -1,0 +1,5 @@
+2026-01-09 03:00:01,861 | INFO | card_fixture | Iniciando teardown: Eliminación de cards...
+2026-01-09 03:00:01,889 | INFO | card_fixture | Card eliminada correctamente: 1683895629144654906
+2026-01-09 03:00:01,911 | INFO | card_fixture | Card eliminada correctamente: 1683895629387924540
+2026-01-09 03:00:01,942 | INFO | card_fixture | Card eliminada correctamente: 1683895629580862526
+2026-01-09 03:00:01,973 | INFO | card_fixture | Card eliminada correctamente: 1683895629748634688
