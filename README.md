@@ -26,19 +26,23 @@
 ```python
   python -m venv env
 ```
+3. Activar entorno virtual
+```env\Scripts\Activate.ps1
+  
+```
 
-3. Instalar Dependencias
+4. Instalar Dependencias
 ```python
   pip install -r requirements.txt
 ```
 
-4. Configuracion de variables de entorno
+5. Configuracion de variables de entorno
 ```python
   BASE_URI=http://localhost:3000/api
   USER_EMAIL=danielabravorueda@gmail.com
   USER_PASSWORD=db8826267
 ```
-5. Ejecutar Servicios Docker para la aplicacion Planka
+6. Ejecutar Servicios Docker para la aplicacion Planka
 ```python
  docker compose up -d
 ```
