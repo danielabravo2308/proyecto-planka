@@ -26,8 +26,9 @@
 ```python
   python -m venv env
 ```
-3. Activar entorno virtual
-```env\Scripts\Activate.ps1
+3. Activar entorno virtual en Windows
+```python
+  env\Scripts\Activate.ps1
   
 ```
 
