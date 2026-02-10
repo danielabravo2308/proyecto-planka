@@ -1,0 +1,3 @@
+2026-02-10 03:52:30,326 | INFO | list_fixture | Setup iniciado para creación de listas
+2026-02-10 03:52:30,342 | INFO | list_fixture | Iniciando teardown: Eliminación de listas...
+2026-02-10 03:52:30,355 | INFO | list_fixture | Lista eliminada correctamente: 1707114865836950624
