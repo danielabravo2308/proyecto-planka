@@ -138,7 +138,7 @@ def test_012_validar_esquema_de_respuesta_al_crear_tablero(setup_board,id_projec
     response = PlankaRequests.post(url,headers,PAYLOAD_BOARD_CREATE)
     log_request_response(url, response, headers, PAYLOAD_BOARD_CREATE)
     AssertionStatusCode.assert_status_code_200(response)
-    AssertionSchemas.validate_output_schema(response,SCHEMA_BOARD_OUTPUT)
+    AssertionSchemas.validate_schema_output_payload(response,SCHEMA_BOARD_OUTPUT)
     created_boards.append(response.json())
 
  

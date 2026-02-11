@@ -51,7 +51,7 @@ def test_013_validar_esquema_de_salida_al_obtener_proyecto(get_token):
     response = PlankaRequests.get(url,headers)
     log_request_response(url, response, headers)
     AssertionStatusCode.assert_status_code_200(response)
-    AssertionSchemas.validate_output_schema(response , SCHEMA_OUTPUT_GET_PROJECTS)
+    AssertionSchemas.validate_schema_output_payload(response , SCHEMA_OUTPUT_GET_PROJECTS)
 
    
 

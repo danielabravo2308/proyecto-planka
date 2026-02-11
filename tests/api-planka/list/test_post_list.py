@@ -147,7 +147,7 @@ def test_013_validar_esquema_de_salida_al_crear_lista(setup_list,id_board):
     response = PlankaRequests.post(url,headers,PAYLOAD_CREATE_LIST)
     log_request_response(url, response, headers, PAYLOAD_CREATE_LIST)
     AssertionStatusCode.assert_status_code_200(response)
-    AssertionSchemas.validate_output_schema(response,SCHEMA_CREATE_LIST_OUTPUT)
+    AssertionSchemas.validate_schema_output_payload(response,SCHEMA_CREATE_LIST_OUTPUT)
     created_lists.append(response.json())
 
    
@@ -163,7 +163,7 @@ def test_014_validar_esquema_de_entrada_al_crear_lista(setup_list,id_board):
     response = PlankaRequests.post(url,headers,PAYLOAD_CREATE_LIST)
     log_request_response(url, response, headers, PAYLOAD_CREATE_LIST)
     AssertionStatusCode.assert_status_code_200(response)
-    AssertionSchemas.validate_input_schema(PAYLOAD_CREATE_LIST,SCHEMA_LIST_PAYLOAD_INPUT)
+    AssertionSchemas.validate_schema_input_payload(PAYLOAD_CREATE_LIST,SCHEMA_LIST_PAYLOAD_INPUT)
     created_lists.append(response.json())
 
     

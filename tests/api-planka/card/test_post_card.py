@@ -52,7 +52,7 @@ def test_003_validar_esquema_de_entrada_de_datos_al_crear_tarjeta(setup_card,id_
     response = PlankaRequests.post(url,headers,PAYLOAD_CREATE_CARD)
     log_request_response(url, response, headers, PAYLOAD_CREATE_CARD)
     AssertionStatusCode.assert_status_code_200(response)
-    AssertionSchemas.validate_input_schema(PAYLOAD_CREATE_CARD, SCHEMA_CARD_PAYLOAD_INPUT)
+    AssertionSchemas.validate_schema_input_payload(PAYLOAD_CREATE_CARD, SCHEMA_CARD_PAYLOAD_INPUT)
     created_cards.append(response.json())
 
 

@@ -53,7 +53,7 @@ def test_015_validar_esquema_de_respuesta_al_obtener_tablero(get_token,id_board)
     response = PlankaRequests.get(url,headers)
     log_request_response(url, response, headers)
     AssertionStatusCode.assert_status_code_200(response)
-    AssertionSchemas.validate_output_schema(response,SCHEMA_BOARD_OUTPUT2)
+    AssertionSchemas.validate_schema_output_payload(response,SCHEMA_BOARD_OUTPUT2)
 
 
    

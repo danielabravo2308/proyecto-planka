@@ -12,29 +12,27 @@ from src.routes.request import PlankaRequests
 @pytest.mark.project_management
 @pytest.mark.smoke
 @pytest.mark.functional_positive
-@pytest.mark.functional_negative
-@pytest.mark.parametrize(
-    "use_fixture,token_value,expected_status",
-    [(True,None,200),
-     (False,TOKEN_INVALID,401)
-    ],
-    ids=[
-        "test_001: crear_proyecto_con_token_valido",
-        "test_002: crear_proyecto_con_token_invalido"
-    ])
-
-def test_crear_proyecto_con_token(setup_project,use_fixture,token_value,expected_status):
-    get_token, created_projects = (setup_project if use_fixture else (token_value, []))
-
+def test_001_crear_proyecto_con_token_valido(setup_project):
+    get_token , created_projects = setup_project
     url = EndpointPlanka.BASE_PROJECTS.value
     headers = {'Authorization': f'Bearer {get_token}'}
     response = PlankaRequests.post(url,headers,PAYLOAD_PROJECT_CREATE)
     log_request_response(url, response, headers, PAYLOAD_PROJECT_CREATE)
-    if expected_status == 200:
-        AssertionStatusCode.assert_status_code_200(response)
-        created_projects.append(response.json())
-    else:
-      AssertionStatusCode.assert_status_code_401(response)
+    AssertionStatusCode.assert_status_code_200(response)
+    created_projects.append(response.json())
+
+
+@pytest.mark.project_management
+@pytest.mark.smoke
+@pytest.mark.functional_positive
+def test_002_crear_proyecto_con_token_invalido(setup_project):
+    get_token , created_projects = setup_project
+    url = EndpointPlanka.BASE_PROJECTS.value
+    headers = {'Authorization': f'Bearer {TOKEN_INVALID}'}
+    response = PlankaRequests.post(url,headers,PAYLOAD_PROJECT_CREATE)
+    log_request_response(url, response, headers, PAYLOAD_PROJECT_CREATE)
+    AssertionStatusCode.assert_status_code_401(response)
+    created_projects.append(response.json())
 
 
 
@@ -49,7 +47,7 @@ def test_003_validar_esquema_de_salida_al_crear_proyecto(setup_project):
     response = PlankaRequests.post(url,headers,PAYLOAD_PROJECT_CREATE)
     log_request_response(url, response, headers, PAYLOAD_PROJECT_CREATE)
     AssertionStatusCode.assert_status_code_200(response)
-    AssertionSchemas.validate_output_schema(response , SCHEMA_OUTPUT_CREATE_PROJECT)
+    AssertionSchemas.validate_schema_output_payload(response , SCHEMA_OUTPUT_CREATE_PROJECT)
     created_projects.append(response.json())
 
 
@@ -65,7 +63,7 @@ def test_004_validar_esquema_de_entrada_al_crear_proyecto(setup_project):
     response = PlankaRequests.post(url,headers,PAYLOAD_PROJECT_CREATE)
     log_request_response(url, response, headers, PAYLOAD_PROJECT_CREATE)
     AssertionStatusCode.assert_status_code_200(response)
-    AssertionSchemas.validate_input_schema(PAYLOAD_PROJECT_CREATE,SCHEMA_INPUT_CREATE_PROJECT)
+    AssertionSchemas.validate_schema_input_payload(PAYLOAD_PROJECT_CREATE,SCHEMA_INPUT_CREATE_PROJECT)
     created_projects.append(response.json())
 
 
