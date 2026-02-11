@@ -18,3 +18,4 @@
 | PLNK-014 | Validar el tiempo de respuesta sea menor a 2 segundos | POST | MEDIA |    | Status 200 |
 
 
+
