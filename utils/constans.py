@@ -1,5 +1,7 @@
 
 TOKEN_INVALID = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9232-4"
+TOKEN_VALID = ""
+TOKEN_VACIO = ""
 #------------------------------------
 
 

@@ -2,7 +2,7 @@ import logging
 import json
 
 
-def log_request_response(url, response, headers=None, payload=None):
+def log_request_response(url, response, headers=None, payload=None,schema=None):
     """
     INFO:  IP Address o dominio
     DEBUG: Request URL + Headers
@@ -25,6 +25,9 @@ def log_request_response(url, response, headers=None, payload=None):
     if payload:
         logging.debug("PAYLOAD REQUEST:\n%s", json.dumps(payload, indent=4, ensure_ascii=False))
   
+    
+    if schema:
+        logging.debug("SCHEMA:\n%s", json.dumps(schema, indent=4, ensure_ascii=False))
 
 
 def get_logger(name="test_logger"):

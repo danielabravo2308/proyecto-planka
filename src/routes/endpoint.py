@@ -49,3 +49,5 @@ class EndpointPlanka(Enum):
     BASE_CARD_WITH_ID_LIST_INVALID = f"{BASE_URI}/lists/{ID_LIST_INVALID_STRING}/cards"
 
     #-----------------------------------------------------
+
+    BASE_USER_MAJOR = f"{BASE_URI}/users"

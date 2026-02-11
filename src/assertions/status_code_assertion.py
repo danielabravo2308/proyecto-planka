@@ -23,3 +23,7 @@ class AssertionStatusCode:
     @staticmethod
     def assert_status_code_400_or_404(response):
         assert response.status_code == 400 or response.status_code == 404
+
+    @staticmethod
+    def assert_status_code_409(response): #Conclict
+        assert response.status_code == 409
