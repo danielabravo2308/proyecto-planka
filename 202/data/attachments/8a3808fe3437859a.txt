@@ -1,1 +1,0 @@
-2026-02-08 03:55:44,371 | INFO | fixture | Setup iniciado para creación de proyectos
