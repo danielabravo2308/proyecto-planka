@@ -1,0 +1,20 @@
+INFO     project_fixture:conftest.py:13 Setup iniciado para creación de proyectos
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects HTTP/1.1" 200 500
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/projects
+INFO     root:logger_helper.py:15 STATUS CODE: 200
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjBiMzlhNjkzLTJiNTItNGE5Mi1hOTFhLTRjNjBhZGMyOTMyZCJ9.eyJpYXQiOjE3NzY5MTc2ODAsImV4cCI6MTgwODQ1MzY4MCwic3ViIjoiMTc1OTMwOTY3MDI3MjQ2Nzk2OSJ9.rq5Mv5I1bROILhqp288HXhNW87-a0d5rmP6ZG-8ApQE"
+}
+DEBUG    root:logger_helper.py:26 PAYLOAD REQUEST:
+{
+    "type": "private",
+    "name": "Nuevo Proyecto",
+    "description": "Descripción del proyecto"
+}
+INFO     project_fixture:conftest.py:18 Iniciando teardown: Eliminación de proyectos...
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "DELETE /api/projects/1759309898752984163 HTTP/1.1" 200 317
+INFO     project_fixture:conftest.py:26 Proyecto eliminado correctamente: 1759309898752984163
