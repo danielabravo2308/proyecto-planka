@@ -1,0 +1,15 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/boards/1760036922790511702/lists HTTP/1.1" 200 192
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/boards/1760036922790511702/lists
+INFO     root:logger_helper.py:15 STATUS CODE: 200
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjkxMDc0Y2Q5LWM1NzAtNDkwYi05NGU0LTNjYWNmOGVmZjhkZiJ9.eyJpYXQiOjE3NzcwMDQzNDksImV4cCI6MTgwODU0MDM0OSwic3ViIjoiMTc2MDAzNjY5Njc1MTA4MDQ0OSJ9.9Zb0YTU-JiEXaHCEw6137x7g0H_VJOHGDAeW9VoJPVM"
+}
+DEBUG    root:logger_helper.py:26 PAYLOAD REQUEST:
+{
+    "type": "active",
+    "position": 1234567894561555544564654564654654564654564324353464565475675857867867867867867867123456789123456789,
+    "name": "En progreso"
+}
