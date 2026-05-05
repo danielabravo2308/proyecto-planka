@@ -1,0 +1,14 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects/1768009088622396431/boards HTTP/1.1" 200 523
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/projects/1768009088622396431/boards
+INFO     root:logger_helper.py:15 STATUS CODE: 200
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjhiYWNmMTQwLTk0MjgtNDBhNC1iYWM2LTczMzFlNzBhNDQ1NiJ9.eyJpYXQiOjE3Nzc5NTQ3MDYsImV4cCI6MTgwOTQ5MDcwNiwic3ViIjoiMTc2ODAwODg3MzQ2Mjk4OTgyNSJ9.p2yvTE5i-7GOfjkbl3fW24wo3dW58s23imEo7O9fogM"
+}
+DEBUG    root:logger_helper.py:26 PAYLOAD REQUEST:
+{
+    "position": 8,
+    "name": 1234
+}
