@@ -1,0 +1,1 @@
+2026-05-28 05:11:01,578 | INFO | fixture | Setup iniciado para creación de proyectos
