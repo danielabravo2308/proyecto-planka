@@ -1,0 +1,15 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/lists/1785432407323706425/cards HTTP/1.1" 400 274
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/lists/1785432407323706425/cards
+INFO     root:logger_helper.py:15 STATUS CODE: 400
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImM1MGU3NjU5LWMyMTctNDdjMi1hN2Y5LTNmZGIyMGRhMTE2MCJ9.eyJpYXQiOjE3ODAwMzE3MjcsImV4cCI6MTgxMTU2NzcyNywic3ViIjoiMTc4NTQzMjE4OTE1Mjc4OTUwNSJ9.GWosDDm9hmCHnvuVAzQc1I2e8rak2a3B6KgqZ1Nm9ak"
+}
+DEBUG    root:logger_helper.py:26 PAYLOAD REQUEST:
+{
+    "type": "project",
+    "position": -123,
+    "name": "Tercera Tarjeta"
+}
