@@ -1,2 +1,0 @@
-2026-05-13 04:48:56,173 | INFO | card_fixture | Setup iniciado para creación de cards
-2026-05-13 04:48:56,185 | INFO | fixture | Setup iniciado para creación de proyectos

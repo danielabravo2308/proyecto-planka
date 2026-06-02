@@ -1,3 +1,0 @@
-2026-05-13 04:48:55,868 | INFO | board_fixture | Setup iniciado para creación de tableros
-2026-05-13 04:48:55,886 | INFO | board_fixture | Iniciando teardown: Eliminación de tableros...
-2026-05-13 04:48:55,907 | INFO | board_fixture | Tablero eliminado correctamente: 1773822633075278877
