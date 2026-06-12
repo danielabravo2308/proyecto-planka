@@ -1,5 +1,0 @@
-2026-05-23 04:43:58,124 | INFO | card_fixture | Iniciando teardown: Eliminación de cards...
-2026-05-23 04:43:58,155 | INFO | card_fixture | Card eliminada correctamente: 1781067889860674618
-2026-05-23 04:43:58,181 | INFO | card_fixture | Card eliminada correctamente: 1781067890137498684
-2026-05-23 04:43:58,211 | INFO | card_fixture | Card eliminada correctamente: 1781067890607260734
-2026-05-23 04:43:58,246 | INFO | card_fixture | Card eliminada correctamente: 1781067890867307584
