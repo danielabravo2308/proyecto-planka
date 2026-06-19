@@ -1,9 +1,0 @@
-DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
-DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "GET /api/lists/1786146886692897875 HTTP/1.1" 200 370
-INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
-DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/lists/1786146886692897875
-INFO     root:logger_helper.py:15 STATUS CODE: 200
-DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
-{
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjE0MGU1MGM5LWZmYjMtNDhjYy1hNzY5LWZmNTQwZWFjN2MxNCJ9.eyJpYXQiOjE3ODAxMTY4OTksImV4cCI6MTgxMTY1Mjg5OSwic3ViIjoiMTc4NjE0NjY2MzA5NDU1MTU1MyJ9.DYLsBJZttogK-L8LjazIS760KwpWf1Yh_xkf3fxvle8"
-}

@@ -1,0 +1,9 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "DELETE /api/boards/ HTTP/1.1" 404 22
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/boards/
+INFO     root:logger_helper.py:15 STATUS CODE: 404
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjE5NTVmMDM2LTZmNTQtNGJiMi1hN2EyLWM5MTk5ODI5NjcyMSJ9.eyJpYXQiOjE3ODE4NTAxOTgsImV4cCI6MTgxMzM4NjE5OCwic3ViIjoiMTgwMDY4NjYyNzAyMjk2MzcxMyJ9.MMC50kVxJ-UGnd1BMDNcCKlvdPE97zLrSwWGMsuCmu4 "
+}
