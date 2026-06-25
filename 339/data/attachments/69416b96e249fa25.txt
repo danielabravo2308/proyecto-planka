@@ -1,0 +1,17 @@
+INFO     list_fixture:conftest.py:13 Setup iniciado para creación de listas
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/boards/1804997456446882902/lists HTTP/1.1" 400 263
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/boards/1804997456446882902/lists
+INFO     root:logger_helper.py:15 STATUS CODE: 400
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRjNzljODBkLTgwM2MtNDFjNy04YjM4LWRjMjhjZjNiZjFmMiJ9.eyJpYXQiOjE3ODIzNjQwNjIsImV4cCI6MTgxMzkwMDA2Miwic3ViIjoiMTgwNDk5NzIzMTA1MzM3NDQ2NSJ9.PvNCjvE2xkHpy8pSXH2tPOW9J8rhQ1Ey3TXMt4BVZHk"
+}
+DEBUG    root:logger_helper.py:26 PAYLOAD REQUEST:
+{
+    "type": "",
+    "position": 6553,
+    "name": "En progreso"
+}
+INFO     list_fixture:conftest.py:31 No hay listas creadas para eliminar.
