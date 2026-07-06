@@ -1,3 +1,0 @@
-2026-06-16 06:35:29,907 | INFO | project_fixture | Setup iniciado para creación de proyectos
-2026-06-16 06:35:29,912 | INFO | project_fixture | Iniciando teardown: Eliminación de proyectos...
-2026-06-16 06:35:29,918 | INFO | project_fixture | No se pudo eliminar el proyecto None. Status: 400
