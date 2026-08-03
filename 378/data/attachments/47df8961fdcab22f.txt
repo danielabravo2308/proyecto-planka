@@ -1,0 +1,18 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects HTTP/1.1" 200 500
+INFO     fixture:conftest.py:38 Setup iniciado para creación de proyectos
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects/1833245895588578337/boards HTTP/1.1" 200 535
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/boards/1833245895756350499/lists HTTP/1.1" 200 191
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/lists/1833245895940899879/cards HTTP/1.1" 200 499
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "DELETE /api/cards/1833245896125449256 HTTP/1.1" 200 499
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/cards/1833245896125449256
+INFO     root:logger_helper.py:15 STATUS CODE: 200
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjllODBlYjBjLWRkNTgtNDllMy05ZGYzLTE2ZTRkZDc4ODQ1ZCJ9.eyJpYXQiOjE3ODU3MzE1NDAsImV4cCI6MTgxNzI2NzU0MCwic3ViIjoiMTgzMzI0NTY3OTM4ODk4NDMyMSJ9.DA0II22pVifQ0_6f-ErAQQFYmDT2CDQEbfTp2OhSMzk"
+}
