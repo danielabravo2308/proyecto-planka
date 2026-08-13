@@ -1,0 +1,9 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "GET /api/cards/1840461294398866481 HTTP/1.1" 200 None
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/cards/1840461294398866481
+INFO     root:logger_helper.py:15 STATUS CODE: 200
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQzYzZlYmUzLWJmMjItNDA0My04MjcwLWIyYmUxOTI2NzQzNiJ9.eyJpYXQiOjE3ODY1OTE2ODIsImV4cCI6MTgxODEyNzY4Miwic3ViIjoiMTg0MDQ2MTA3NDM3NDA2NzIwMSJ9.s4MC-TVUSe0IQ2QkhV0nvzSMaxjDXjI_1133gf2c3n0"
+}
