@@ -1,0 +1,22 @@
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects HTTP/1.1" 200 500
+INFO     fixture:conftest.py:38 Setup iniciado para creación de proyectos
+INFO     board_fixture:conftest.py:15 Setup iniciado para creación de tableros
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects/1845499971244131343/boards HTTP/1.1" 200 535
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/projects/1845499971244131343/boards
+INFO     root:logger_helper.py:15 STATUS CODE: 200
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVlMmJmNDcxLWYwMzAtNDg2Yy04MmFlLTVhNjY4ZTc5MGZhOCJ9.eyJpYXQiOjE3ODcxOTIzMzksImV4cCI6MTgxODcyODMzOSwic3ViIjoiMTg0NTQ5OTc1NDE4ODg5OTMyOSJ9.Uw0-WVsPV6e-WaXnKZKF9hmWMIHWef4FKzSVs67pW-s"
+}
+DEBUG    root:logger_helper.py:26 PAYLOAD REQUEST:
+{
+    "position": 8,
+    "name": "Proyecto Oficial"
+}
+INFO     board_fixture:conftest.py:19 Iniciando teardown: Eliminación de tableros...
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "DELETE /api/boards/1845499971411903505 HTTP/1.1" 200 285
+INFO     board_fixture:conftest.py:26 Tablero eliminado correctamente: 1845499971411903505
