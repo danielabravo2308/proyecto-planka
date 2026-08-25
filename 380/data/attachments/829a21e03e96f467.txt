@@ -1,2 +1,0 @@
-2026-08-05 04:14:34,029 | INFO | board_fixture | Setup iniciado para creación de tableros
-2026-08-05 04:14:34,036 | INFO | board_fixture | No hay tableros creados para eliminar.
