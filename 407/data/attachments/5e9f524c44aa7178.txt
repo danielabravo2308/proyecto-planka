@@ -1,0 +1,30 @@
+INFO     card_fixture:conftest.py:14 Setup iniciado para creación de cards
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects HTTP/1.1" 200 500
+INFO     fixture:conftest.py:38 Setup iniciado para creación de proyectos
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/projects/1854311783502709811/boards HTTP/1.1" 200 535
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/boards/1854311783645316149/lists HTTP/1.1" 200 191
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:3000
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:3000 "POST /api/lists/1854311783779533881/cards HTTP/1.1" 200 499
+INFO     root:logger_helper.py:13 IP ADDRESS OR DOMAIN: localhost:3000
+DEBUG    root:logger_helper.py:14 REQUEST URL: http://localhost:3000/api/lists/1854311783779533881/cards
+INFO     root:logger_helper.py:15 STATUS CODE: 200
+DEBUG    root:logger_helper.py:22 REQUEST HEADERS:
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQ1ODlkZWMzLTI5NzAtNDFmOC1iYTZmLTJlNmY1YWM0MjQ2YSJ9.eyJpYXQiOjE3ODgyNDI3ODksImV4cCI6MTgxOTc3ODc4OSwic3ViIjoiMTg1NDMxMTU2NzgzMTU5ODA4MSJ9.QoisvmAOlkLK6Ppy7Zm6GGzoOhV-wpRewngbAlv4wcs"
+}
+DEBUG    root:logger_helper.py:26 PAYLOAD REQUEST:
+{
+    "type": "project",
+    "position": 65536,
+    "name": "Tercera Tarjeta",
+    "description": "Mi description tercera",
+    "dueDate": "2024-01-01T00:00:00.000Z",
+    "isDueCompleted": false,
+    "stopwatch": {
+        "startedAt": "2024-01-01T00:00:00.000Z",
+        "total": 3600
+    }
+}
