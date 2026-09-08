@@ -1,0 +1,1 @@
+2026-09-08 05:42:16,353 | INFO | fixture | Setup iniciado para creación de proyectos
