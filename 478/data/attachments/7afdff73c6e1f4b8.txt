@@ -1,0 +1,2 @@
+2026-11-11 07:34:22,912 | INFO | card_fixture | Setup iniciado para creación de cards
+2026-11-11 07:34:22,926 | INFO | fixture | Setup iniciado para creación de proyectos
